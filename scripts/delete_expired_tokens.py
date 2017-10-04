@@ -10,7 +10,7 @@ project_path = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 if project_path not in sys.path:
     sys.path.append(project_path)
 
-from control.veda_env import *
+from control.control_env import *
 
 from oauth2_provider.models import AccessToken
 
@@ -18,7 +18,6 @@ from oauth2_provider.models import AccessToken
 def get_tokens():
     auth_query = AccessToken.objects.filter(
         expires__lt=datetime.datetime.now() - timedelta(hours=1),
-        # expires__gt=datetime.datetime.now() - timedelta(days=3)
     )
     for a in auth_query:
         AccessToken.objects.filter(token=a.token).delete()
